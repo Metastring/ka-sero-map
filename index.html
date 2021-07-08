@@ -33,6 +33,11 @@
 <script src="lib/leaflet-hash.min.js"></script>
 <script src="lib/flatpickr.js"></script>
 <script src="lib/Leaflet.Control.Custom.js"></script>
+
+<!-- amcharts -->
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+
 <style>
 body {
     font-size: 0.85em;
@@ -140,6 +145,10 @@ textarea {
     width: 100px;
 }
 
+#chartdiv {
+  width: 100%;
+  height: 800px;
+}
 </style>
 
 </head>
@@ -152,20 +161,23 @@ textarea {
     <div id="mapContainer">
     <div id="map"></div>
     </div>
+    <br>
+    <div id="tabulator1"></div>
 </div>
 
 <div class="col-md-6">
     <div id="districtInfo">Click on a district to see all its details.</div>
-    <p>Chart comes here</p>
+    <div id="chartdiv"></div>
 
 </div>
 
 </div>
 <br>
-<div id="tabulator1"></div>
+
 
 </div>
 <script src="js/common.js"></script>
 <script src="js/main.js"></script>
+<script src="js/chart.js"></script>
 </body>
 </html>

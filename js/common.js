@@ -19,6 +19,8 @@ const quinColors = ["#d9f0a3","#addd8e","#78c679","#31a354","#006837"]
 const crosshairPath = 'lib/focus-black.svg';
 const crosshairSize = 30;
 
+var globalChartReadyFlag = false;
+
 // hiding and showing elements, including their screen real estate. from https://stackoverflow.com/a/51113691/4355695
 function hide(el) {
     el.style.visibility = 'hidden';	

@@ -20,7 +20,7 @@ var tabulator1 = new Tabulator("#tabulator1", {
     clipboardCopySelector: "active",
     tooltipsHeader: true, //enable header tooltips
     index: "district",
-    layout:"fitData",
+    layout:"fitColumns",
     columns: [
         { title: "District", field: "district", headerFilter: "input" },
         { title: "Samples", field: "Samples", headerFilter: "input" },
@@ -94,22 +94,8 @@ districtsLayer.addTo(map);
 // ############################################
 // RUN ON PAGE LOAD
 $(document).ready(function () {
-    // populateLegend();
-    // populateInfo();
-    // flatpickr("#date1", { 
-    //     defaultDate:getTodayDate(0), 
-    //     maxDate:'today',
-    //     minDate: '2021-04-23',
-    //     onChange: function(selectedDates, dateStr, instance) {
-    //         loadMap(dateStr);
-    //     }
-    // }); // minDate: d, maxDate: EP_DATE
-
-    // var date1 = getTodayDate(0);
-    
     populateDropdown();
     
-
     // load up the geojson
     $.ajax({
         url : `data/karnataka_districts_loaded.geojson`,
@@ -123,6 +109,7 @@ $(document).ready(function () {
             calcQuintiles();
             loadMap(0);
             loadTable();
+            makeChart(0);
 
         },
         error: function(jqXHR, exception) {
@@ -150,6 +137,7 @@ function populateDropdown() {
     $('#metric').html(content);
     $('#metric').change(function () { 
         loadMap($(this).val());
+        makeChart($(this).val());
     });
 
 }
@@ -217,7 +205,8 @@ function loadMap(i) {
         map.fitBounds(e.target.getBounds());
         populateInfo(e.target.feature.properties);
         tabulator1.deselectRow();
-        tabulator1.selectRow(e.target.feature.properties.district);
+        tabulator1.selectRow(e.target.feature.properties.district); 
+        // this does not trigger rowSelected handler in tabulator
     }
 
     var shapes = new L.geoJson(globalGeo, {
@@ -308,7 +297,9 @@ function calcQuintiles() {
         console.log(globalQuintiles[metric]);
     }
 }
-// get color depending on population density value
+
+
+// get color depending on value
 function getColor(i, val, legend=false) {
     let color = val > globalQuintiles[i][4] ? quinColors[4] :
         val > globalQuintiles[i][3] ? quinColors[3] :
