@@ -20,6 +20,7 @@ var tabulator1 = new Tabulator("#tabulator1", {
     clipboardCopySelector: "active",
     tooltipsHeader: true, //enable header tooltips
     index: "district",
+    layout:"fitData",
     columns: [
         { title: "District", field: "district", headerFilter: "input" },
         { title: "Samples", field: "Samples", headerFilter: "input" },
@@ -228,14 +229,35 @@ function loadMap(i) {
 }
 
 function populateInfo(p) {
-    var content = `<p>District: ${p.district}<br>
-    Samples: ${p['Samples']}<br>
-    % IgG against SARS-CoV2: ${p['% IgG against SARS-CoV2']}<br>
-    % active infection: ${p['% active infection']}</br>
-    % prevalence of COVID-19: ${p['% prevalence of COVID-19']}<br>
-    CIR: ${p['CIR']}<br>
-    IFR: ${p['IFR']}<br>
-    </p>`;
+    var content = `<div class="row">
+    <div class="col-md-3">
+        District<br><b>${p.district}</b>
+    </div>
+    <div class="col-md-3">
+        Samples<br><b>${p['Samples']}</b>
+    </div>
+    <div class="col-md-3">
+        % IgG against SARS-CoV2<br><b>${p['% IgG against SARS-CoV2']}</b>
+    </div>
+    <div class="col-md-3">
+        % active infection<br><b>${p['% active infection']}</b>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="col-md-3">
+        % prevalence of COVID-19<br><b>${p['% prevalence of COVID-19']}</b>
+    </div>
+    <div class="col-md-3">
+        CIR<br><b>${p['CIR']}</b>
+    </div>
+    <div class="col-md-3">
+        IFR<br><b>${p['IFR']}</b>
+    </div>
+    <div class="col-md-3">
+        IFR-CIR quadrant<br><b>${p['IFR-CIR quadrant'] || "N/A"}</b>
+    </div>
+    </div>`;
     
     $('#districtInfo').html(content);
 }
@@ -272,26 +294,18 @@ function calcQuintiles() {
             }
         }
 
-        // https://stackoverflow.com/a/31572826/4355695
+        // Quintile buckets calculation. From https://stackoverflow.com/a/31572826/4355695
         values.sort(function(a, b){return a-b});
-        console.log(values);
+        // console.log(values);
         len =  values.length;
         per20 = Math.floor(len*.2) - 1;
         per40 = Math.floor(len*.4) - 1;
         per60 = Math.floor(len*.6) - 1;
         per80 = Math.floor(len*.8) - 1;
-        // globalQuintiles[metric] = [
-        //     `${values[0]} - ${values[per20]}`,
-        //     `${values[per20]} - ${values[per40]}`,
-        //     `${values[per40]} - ${values[per60]}`,
-        //     `${values[per60]} - ${values[per80]}`,
-        //     `${values[per80]} - ${values[len-1]}`
-        // ];
 
         globalQuintiles[metric] = [ values[0], values[per20], values[per40],
             values[per60], values[per80], values[len-1] ];
         console.log(globalQuintiles[metric]);
-
     }
 }
 // get color depending on population density value
