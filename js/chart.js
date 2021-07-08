@@ -42,8 +42,16 @@ function makeChart(i=0) {
 
 	categoryAxis.sortBySeries = series;
 
+	// ########################
 	// now set the data
-	$('#chart_metric').html(datacolumns[i]);
+
+	// heading
+	let heading = datacolumns[i];
+	if(heading == 'CIR') heading = "CIR: Case to Infection Ratio";
+	if(heading == 'IFR') heading = "IFR: Infection Fatality Ratio";
+
+	$('#chart_metric').html(heading);
+	
 	var collector = [];
 	globalGeo.features.forEach( f => {
 		let val = parseFloat(f.properties[datacolumns[i]]);
