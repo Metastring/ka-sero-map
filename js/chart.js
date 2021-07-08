@@ -9,7 +9,7 @@ am4core.ready(function() {
 
 function makeChart(i=0) {
 	var chart = am4core.create("chartdiv", am4charts.XYChart);
-	chart.padding(40, 40, 40, 40);
+	chart.padding(0, 40, 40, 40);
 
 	var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
 	categoryAxis.renderer.grid.template.location = 0;
@@ -43,7 +43,7 @@ function makeChart(i=0) {
 	categoryAxis.sortBySeries = series;
 
 	// now set the data
-	// datacolumns[i]
+	$('#chart_metric').html(datacolumns[i]);
 	var collector = [];
 	globalGeo.features.forEach( f => {
 		collector.push({"district":f.properties.district, "val": f.properties[datacolumns[i]]});

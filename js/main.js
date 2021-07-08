@@ -42,12 +42,12 @@ var tabulator1 = new Tabulator("#tabulator1", {
 
 var cartoPositron = L.tileLayer.provider('CartoDB.Positron');
 var OSM = L.tileLayer.provider('OpenStreetMap.Mapnik');
-var gStreets = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3']});
-var gHybrid = L.tileLayer('https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3']});
 var esriWorld = L.tileLayer.provider('Esri.WorldImagery');
+// var gStreets = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3']});
+// var gHybrid = L.tileLayer('https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3']});
 
 var baseLayers = { "OpenStreetMap.org" : OSM, "Carto Positron": cartoPositron, "ESRI Satellite": esriWorld, 
-    "Streets": gStreets, "Hybrid": gHybrid };
+    /*"Streets": gStreets, "Hybrid": gHybrid */ };
 
 var map = new L.Map('map', {
     center: STARTLOCATION,
@@ -220,31 +220,31 @@ function loadMap(i) {
 function populateInfo(p) {
     var content = `<div class="row">
     <div class="col-md-3">
-        District<br><b>${p.district}</b>
+        District<br><span class="info_district">${p.district}</span>
     </div>
     <div class="col-md-3">
-        Samples<br><b>${p['Samples']}</b>
+        Samples<br><span class="info_value">${p['Samples']}</span>
     </div>
     <div class="col-md-3">
-        % IgG against SARS-CoV2<br><b>${p['% IgG against SARS-CoV2']}</b>
+        % IgG against SARS-CoV2<br><span class="info_value">${p['% IgG against SARS-CoV2']}</span>
     </div>
     <div class="col-md-3">
-        % active infection<br><b>${p['% active infection']}</b>
+        % active infection<br><span class="info_value">${p['% active infection']}</span>
     </div>
     </div>
 
     <div class="row">
     <div class="col-md-3">
-        % prevalence of COVID-19<br><b>${p['% prevalence of COVID-19']}</b>
+        % prevalence of COVID-19<br><span class="info_value">${p['% prevalence of COVID-19']}</span>
     </div>
     <div class="col-md-3">
-        CIR<br><b>${p['CIR']}</b>
+        CIR<br><span class="info_value">${p['CIR']}</span>
     </div>
     <div class="col-md-3">
-        IFR<br><b>${p['IFR']}</b>
+        IFR<br><span class="info_value">${p['IFR']}</span>
     </div>
     <div class="col-md-3">
-        IFR-CIR quadrant<br><b>${p['IFR-CIR quadrant'] || "N/A"}</b>
+        IFR-CIR quadrant<br><span class="info_value">${p['IFR-CIR quadrant'] || "N/A"}</span>
     </div>
     </div>`;
     

@@ -10,7 +10,7 @@ const MINZOOM = 5;
 const MAXZOOM = 20;
 const MAXBOUNDSVISCOSITY = 0.9;
 
-const datacolumns = [ "Samples", "% IgG against SARS-CoV2", "% active infection", "% prevalence of COVID-19", "CIR", "IFR"];
+const datacolumns = ["% prevalence of COVID-19", "Samples", "% IgG against SARS-CoV2", "% active infection", "CIR", "IFR"];
 
 const quinColors = ["#d9f0a3","#addd8e","#78c679","#31a354","#006837"]
 // from https://colorbrewer2.org/#type=sequential&scheme=YlGn&n=6

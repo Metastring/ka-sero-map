@@ -99,7 +99,7 @@ textarea {
     box-shadow:0px 0px 5px black; 
     min-height: 100px;
     max-height: 300px;
-    width: 150px;
+    width: 200px;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -142,19 +142,28 @@ textarea {
 }
 
 #metric {
-    width: 100px;
+    width: 150px;
 }
 
 #chartdiv {
   width: 100%;
   height: 800px;
 }
+
+.info_value {
+    font-size: 2em;
+    font-weight: bold;
+}
+.info_district {
+    font-size: 1.5em;
+    font-weight: bold;
+    word-break: break-word; /*https://developer.mozilla.org/en-US/docs/Web/CSS/word-break*/
+}
 </style>
 
 </head>
 <body>
-<div id="topMenu"></div>
-
+<h2 align="center">Sero Prevalence Survey, Karnataka, India</h2>
 <div class="container-fluid">
 <div class="row">
 <div class="col-md-6">
@@ -166,7 +175,13 @@ textarea {
 </div>
 
 <div class="col-md-6">
-    <div id="districtInfo">Click on a district to see all its details.</div>
+    <div id="districtInfo">
+        Choose a metric in the info box on map to visualize it.<br>
+        Click on a district to see all its details.
+        <br><br>
+    </div>
+    <hr>
+    <h4 align="center" id="chart_metric"></h4>
     <div id="chartdiv"></div>
 
 </div>
