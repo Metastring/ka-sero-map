@@ -6,7 +6,7 @@ const STARTLOCATION = [14.5410, 75.9155]; //Pune
 const STARTZOOM = 6;
 const STARTLOCATIONjson = {lat: STARTLOCATION[0], lng: STARTLOCATION[1]};
 const BOUNDS = [[10.3582,71.3672], [20.3652,80.0024]];
-const MINZOOM = 5;
+const MINZOOM = 6;
 const MAXZOOM = 20;
 const MAXBOUNDSVISCOSITY = 0.9;
 
