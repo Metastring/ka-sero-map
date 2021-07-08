@@ -46,7 +46,12 @@ function makeChart(i=0) {
 	$('#chart_metric').html(datacolumns[i]);
 	var collector = [];
 	globalGeo.features.forEach( f => {
-		collector.push({"district":f.properties.district, "val": f.properties[datacolumns[i]]});
+		let val = parseFloat(f.properties[datacolumns[i]]);
+		if( datacolumns[i] == 'CIR' ) {
+			val = parseInt(f.properties[datacolumns[i]].split(':')[1]);
+		}
+
+		collector.push({"district":f.properties.district, "val": val });
 	})
 	console.log(collector);
 	chart.data = collector;

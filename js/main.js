@@ -27,7 +27,8 @@ var tabulator1 = new Tabulator("#tabulator1", {
         { title: "% IgG against SARS-CoV2", field: "% IgG against SARS-CoV2", headerFilter: "input" },
         { title: "% prevalence of COVID-19", field: "% prevalence of COVID-19", headerFilter: "input" },
         { title: "Case to Infection Ratio", field: "CIR", headerFilter: "input" },
-        { title: "Infection Fatality Ratio", field: "IFR", headerFilter: "input" }
+        { title: "Infection Fatality Ratio", field: "IFR", headerFilter: "input" },
+        { title: "IFR-CIR quadrant", field: "IFR-CIR quadrant", headerFilter: "input" }
     ],
     rowSelected: function (row) {
         var data = row.getData();
@@ -152,8 +153,9 @@ function loadMap(i) {
     function district_style(feature) {
         let val = feature.properties[datacolumns[i]];
         if(datacolumns[i] == 'CIR') {
-            val = val.split(':')[1]; 
+            val = parseFloat(val.split(':')[1]); 
         }
+        else val = parseFloat(val);
         let color = getColor(i,val);
         return {
             weight: 1,
